@@ -8,13 +8,15 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class MoneyCalculator {
-    public static void main(String[] args) throws Exception {
+
+    double amount;
+    double exchangeRate;
+    String currency;
+
+    public static void main(String[] args) throws IOException {
         MoneyCalculator moneyCalculator = new MoneyCalculator();
         moneyCalculator.control();
     }
-
-    private double amount;
-    private double exchangeRate;
 
     private void control() throws IOException{
         input();
@@ -24,17 +26,20 @@ public class MoneyCalculator {
 
     private void input(){
         System.out.println("Welcome once again to MoneyCalculator\n");
-        System.out.println("Introduce the amount of money you would like to exchange (USD to EUR): ");
+        System.out.println("Introduce the amount of money you would like to exchange to EUR: ");
         Scanner scanner = new Scanner(System.in);
         amount = scanner.nextDouble();
+
+        System.out.println("Selected currency: ");
+        currency = scanner.next();
     }
 
     private void process() throws IOException{
-        exchangeRate = getExchangeRate("USD", "EUR");
+        exchangeRate = getExchangeRate(currency, "EUR");
     }
 
     private void output(){
-        System.out.println(amount + "USD are equivalent to "+ amount*exchangeRate +"EUR");
+        System.out.println(amount + " "+currency+" are equivalent to "+ amount*exchangeRate +"EUR");
     }
 
     private static double getExchangeRate(String from, String to) throws IOException {
