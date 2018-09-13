@@ -9,12 +9,32 @@ import java.util.Scanner;
 
 public class MoneyCalculator {
     public static void main(String[] args) throws Exception {
+        MoneyCalculator moneyCalculator = new MoneyCalculator();
+        moneyCalculator.control();
+    }
+
+    private double amount;
+    private double exchangeRate;
+
+    private void control() throws IOException{
+        input();
+        process();
+        output();
+    }
+
+    private void input(){
         System.out.println("Welcome once again to MoneyCalculator\n");
         System.out.println("Introduce the amount of money you would like to exchange (USD to EUR): ");
         Scanner scanner = new Scanner(System.in);
-        double dollars = scanner.nextDouble();
-        double exchangeRate = getExchangeRate("USD", "EUR");
-        System.out.println(dollars + "USD are equivalent to "+ dollars*exchangeRate +"EUR");
+        amount = scanner.nextDouble();
+    }
+
+    private void process() throws IOException{
+        exchangeRate = getExchangeRate("USD", "EUR");
+    }
+
+    private void output(){
+        System.out.println(amount + "USD are equivalent to "+ amount*exchangeRate +"EUR");
     }
 
     private static double getExchangeRate(String from, String to) throws IOException {
