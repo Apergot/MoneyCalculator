@@ -11,7 +11,8 @@ public class MoneyCalculator {
 
     double amount;
     double exchangeRate;
-    String currency;
+    String currencyFrom;
+    String currencyTo;
 
     public static void main(String[] args) throws IOException {
         MoneyCalculator moneyCalculator = new MoneyCalculator();
@@ -26,20 +27,23 @@ public class MoneyCalculator {
 
     private void input(){
         System.out.println("Welcome once again to MoneyCalculator\n");
-        System.out.println("Introduce the amount of money you would like to exchange to EUR: ");
+        System.out.println("Introduce the amount of money you would like to exchange: ");
         Scanner scanner = new Scanner(System.in);
         amount = scanner.nextDouble();
 
-        System.out.println("Selected currency: ");
-        currency = scanner.next();
+        System.out.println("Choose your actual currency: ");
+        currencyFrom = scanner.next();
+
+        System.out.println("Choose your desired currency: ");
+        currencyTo = scanner.next();
     }
 
     private void process() throws IOException{
-        exchangeRate = getExchangeRate(currency, "EUR");
+        exchangeRate = getExchangeRate(currencyFrom, currencyTo);
     }
 
     private void output(){
-        System.out.println(amount + " "+currency+" are equivalent to "+ amount*exchangeRate +"EUR");
+        System.out.println(amount + " "+currencyFrom+" are equivalent to "+ amount*exchangeRate +"EUR");
     }
 
     private static double getExchangeRate(String from, String to) throws IOException {
